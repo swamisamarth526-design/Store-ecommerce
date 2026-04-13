@@ -1,3 +1,17 @@
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
+
+const requiredEnv = (name, value) => {
+  if (typeof value === 'string' && value.trim() !== '') {
+    return value;
+  }
+
+  throw new Error(
+    `Missing required environment variable ${name}. ` +
+    `Create server/.env from server/.env.example or add ${name} to your environment.`
+  );
+};
+
 module.exports = {
   app: {
     name: 'Mern Ecommerce',
@@ -9,7 +23,7 @@ module.exports = {
     url: process.env.MONGO_URI
   },
   jwt: {
-    secret: process.env.JWT_SECRET,
+    secret: requiredEnv('JWT_SECRET', process.env.JWT_SECRET),
     tokenLife: '7d'
   },
   mailchimp: {
