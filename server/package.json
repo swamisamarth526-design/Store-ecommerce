@@ -2,7 +2,7 @@
   "name": "server",
   "version": "1.0.0",
   "description": "MERN Ecommerce Server",
-  "packageManager": "npm@10.22.2",
+  "packageManager": "npm@11.11.0",
   "scripts": {
     "dev": "nodemon",
     "start": "cross-env NODE_ENV=production node index.js",
