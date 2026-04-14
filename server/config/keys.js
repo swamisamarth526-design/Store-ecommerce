@@ -1,6 +1,8 @@
 const path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 
+const isProduction = process.env.NODE_ENV === 'production';
+
 const requiredEnv = (name, value) => {
   if (typeof value === 'string' && value.trim() !== '') {
     return value;
@@ -12,6 +14,14 @@ const requiredEnv = (name, value) => {
   );
 };
 
+const envOrDefault = (name, defaultValue) => {
+  if (typeof process.env[name] === 'string' && process.env[name].trim() !== '') {
+    return process.env[name];
+  }
+
+  return isProduction ? undefined : defaultValue;
+};
+
 module.exports = {
   app: {
     name: 'Mern Ecommerce',
@@ -20,10 +30,16 @@ module.exports = {
   },
   port: process.env.PORT || 3000,
   database: {
-    url: requiredEnv('MONGO_URI', process.env.MONGO_URI)
+    url: requiredEnv(
+      'MONGO_URI',
+      envOrDefault('MONGO_URI', 'mongodb://127.0.0.1:27017/mern_ecommerce')
+    )
   },
   jwt: {
-    secret: requiredEnv('JWT_SECRET', process.env.JWT_SECRET),
+    secret: requiredEnv(
+      'JWT_SECRET',
+      envOrDefault('JWT_SECRET', 'change_this_to_a_strong_secret')
+    ),
     tokenLife: '7d'
   },
   mailchimp: {
