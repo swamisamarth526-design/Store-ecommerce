@@ -37,7 +37,7 @@ module.exports = {
   },
   port: process.env.PORT || 3000,
   database: {
-    url: envOrDefault('MONGO_URI', 'mongodb://mongo:27017/mern_ecommerce')
+    url: envOrDefault('MONGO_URI', 'mongodb://127.0.0.1:27017/mern_ecommerce')
   },
   jwt: {
     secret: envOrDefault('JWT_SECRET', 'update_your_JWT_secret'),
