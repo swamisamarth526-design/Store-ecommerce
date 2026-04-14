@@ -4,13 +4,16 @@ const template = require('../config/template');
 const keys = require('../config/keys');
 
 const { key, domain, sender } = keys.mailgun;
+const isProduction = process.env.NODE_ENV === 'production';
 
 class MailgunService {
   init() {
     if (!key || !domain || !sender) {
-      console.warn(
-        'Mailgun is not configured. Set MAILGUN_KEY, MAILGUN_DOMAIN, and MAILGUN_EMAIL_SENDER.'
-      );
+      if (!isProduction) {
+        console.warn(
+          'Mailgun is not configured. Set MAILGUN_KEY, MAILGUN_DOMAIN, and MAILGUN_EMAIL_SENDER.'
+        );
+      }
       return null;
     }
 

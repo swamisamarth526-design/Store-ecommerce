@@ -1,6 +1,8 @@
 const path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 
+const isProduction = process.env.NODE_ENV === 'production';
+
 const requiredEnv = (name, value) => {
   if (typeof value === 'string' && value.trim() !== '') {
     return value;
@@ -18,9 +20,9 @@ const envOrDefault = (name, defaultValue) => {
   }
 
   if (typeof defaultValue === 'string' && defaultValue.trim() !== '') {
-    console.warn(
-      `Warning: ${name} is not set; falling back to default value.`
-    );
+    if (!isProduction) {
+      console.warn(`Warning: ${name} is not set; falling back to default value.`);
+    }
     return defaultValue;
   }
 

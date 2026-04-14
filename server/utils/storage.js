@@ -1,13 +1,14 @@
 const AWS = require('aws-sdk');
 
 const keys = require('../config/keys');
+const isProduction = process.env.NODE_ENV === 'production';
 
 exports.s3Upload = async image => {
   try {
     let imageUrl = '';
     let imageKey = '';
 
-    if (!keys.aws.accessKeyId) {
+    if (!keys.aws.accessKeyId && !isProduction) {
       console.warn('Missing aws keys');
     }
 

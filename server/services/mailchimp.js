@@ -3,13 +3,16 @@ const Mailchimp = require('mailchimp-api-v3');
 const keys = require('../config/keys');
 
 const { key, listKey } = keys.mailchimp;
+const isProduction = process.env.NODE_ENV === 'production';
 
 class MailchimpService {
   init() {
     if (!key || !listKey) {
-      console.warn(
-        'Mailchimp is not configured. Set MAILCHIMP_KEY and MAILCHIMP_LIST_KEY.'
-      );
+      if (!isProduction) {
+        console.warn(
+          'Mailchimp is not configured. Set MAILCHIMP_KEY and MAILCHIMP_LIST_KEY.'
+        );
+      }
       return null;
     }
 
