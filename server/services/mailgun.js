@@ -1,5 +1,3 @@
-const Mailgun = require('mailgun-js');
-
 const template = require('../config/template');
 const keys = require('../config/keys');
 
@@ -17,6 +15,7 @@ class MailgunService {
       return null;
     }
 
+    const Mailgun = require('mailgun-js');
     return new Mailgun({
       apiKey: key,
       domain: domain

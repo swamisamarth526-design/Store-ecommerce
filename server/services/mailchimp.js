@@ -1,5 +1,3 @@
-const Mailchimp = require('mailchimp-api-v3');
-
 const keys = require('../config/keys');
 
 const { key, listKey } = keys.mailchimp;
@@ -16,6 +14,7 @@ class MailchimpService {
       return null;
     }
 
+    const Mailchimp = require('mailchimp-api-v3');
     return new Mailchimp(key);
   }
 }
