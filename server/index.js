@@ -42,11 +42,3 @@ setupDB()
     console.error(`${chalk.red('✗')} Server startup aborted due to DB error.`);
     process.exit(1);
   });
-console.log(
-  `${chalk.green('✓')} ${chalk.blue(
-    `Listening on port ${port}. Visit http://localhost:${port}/ in your browser.`
-  )}`
-);
-});
-
-socket(server);
