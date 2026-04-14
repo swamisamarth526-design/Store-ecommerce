@@ -20,7 +20,7 @@ module.exports = {
   },
   port: process.env.PORT || 3000,
   database: {
-    url: process.env.MONGO_URI
+    url: requiredEnv('MONGO_URI', process.env.MONGO_URI)
   },
   jwt: {
     secret: requiredEnv('JWT_SECRET', process.env.JWT_SECRET),
